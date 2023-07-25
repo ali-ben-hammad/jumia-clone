@@ -16,7 +16,8 @@ module.exports = {
         // Add your custom colors here
         "custom-orange": "#f68b1e;",
         "custom-gray": "#313133",
-        'custom-hover-orange': '#e07e1b'
+        "custom-hover-orange": "#e07e1b",
+        "custom-hover-gray": "#d4d4d6",
       },
     },
   },

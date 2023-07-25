@@ -33,12 +33,12 @@ export const Header = () => {
             <input
               type="text"
               placeholder="Cherchez un produit, une marque ou une catégorie"
-              className="bg-inherit w-full flex-grow-1"
+              className="bg-inherit w-full flex-grow-1 outline-none"
               name=""
               id=""
             />
           </div>
-          <div className="mx-2 py-3 px-4 ml-2 font-medium cursor-pointer text-white leading-4 hover:bg-custom-hover-orange drop-shadow-[0_4px_8px_rgba(0,0,0,0.2)] felx items-center justify text-center uppercase bg-custom-orange rounded">
+          <div className="mx-2 py-3 px-4 ml-2 font-medium cursor-pointer text-white leading-4 hover:bg-custom-hover-orange shadow-[0_4px_8px_0_rgba(0,0,0,0.2)] felx items-center justify text-center uppercase bg-custom-orange rounded">
             Rechercher
           </div>
         </form>
