@@ -6,8 +6,8 @@ import { Dropdown2 } from "./Dropdown2";
 export const Header = () => {
   return (
     <div className="bg-slate-100 text-custom-gray text-sm">
-      <div className="container mx-auto py-4 max-h-24  h-[72px] items-center flex  flex-initial justify-between">
-        <div className="px-2">
+      <div className="container mx-auto py-4 max-h-24 max-w-[1184px] font-medium  text-base  items-center flex  flex-initial justify-between">
+        <div className="px-2 min-w-[18.75%]">
           <svg role="img" viewBox="0 0 172 30" width="134" height="30">
             <path
               fill="#282828"
@@ -20,7 +20,7 @@ export const Header = () => {
           </svg>
         </div>
         <form className="flex flex-grow-1 w-full  h-full max-w-full px-2">
-          <div className="flex items-center rounded  border w-full border-gray-600">
+          <div className="flex items-center rounded  border w-full border-gray-400">
             <svg
               viewBox="0 0 24 24"
               width="24"
@@ -38,13 +38,24 @@ export const Header = () => {
               id=""
             />
           </div>
-          <div className="mx-2 py-3 px-4 ml-2 font-medium cursor-pointer text-white leading-4 hover:bg-custom-hover-orange shadow-[0_4px_8px_0_rgba(0,0,0,0.2)] felx items-center justify text-center uppercase bg-custom-orange rounded">
+          <div className="ml-2 py-3 px-4 cursor-pointer text-white text-sm leading-4 hover:bg-custom-hover-orange shadow-[0_4px_8px_0_rgba(0,0,0,0.2)] felx items-center justify text-center uppercase bg-custom-orange rounded">
             Rechercher
           </div>
         </form>
         <div className="flex">
           <Dropdown1 />
           <Dropdown2 />
+          <div className="p-2 flex relative items-center justify-center rounded cursor-pointer hover:text-custom-hover-orange">
+            <svg
+              viewBox="0 0 24 24"
+              className="mr-2 flex-shrink-0"
+              width="24"
+              height="24"
+              fill="currentColor"
+            >
+<path d="M15.55 13a2 2 0 0 0 1.75-1.03l3.58-6.49A1 1 0 0 0 20.01 4H5.21l-.94-2H1v2h2l3.6 7.59-1.35 2.44A2 2 0 0 0 7 17h12v-2H7l1.1-2h7.45zM6.16 6h12.15l-2.76 5H8.53L6.16 6zM7 18a2 2 0 1 0 .01 4A2 2 0 0 0 7 18zm10 0a2 2 0 1 0 .01 4 2 2 0 0 0-.01-4z"></path>            </svg>
+            <span className="whitespace-nowrap">Panier</span>
+          </div>
         </div>
       </div>
     </div>
