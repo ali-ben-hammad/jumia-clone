@@ -1,0 +1,18 @@
+/* CSS for the tape animation */
+.tape {
+    width: 60%;
+    height: 2px;
+    background-color: #f68b1e;
+    position: relative;
+    animation: moveTape 2s linear infinite;
+    overflow: hidden; /* Adjust the time based on the desired animation duration */
+  }
+  
+  @keyframes moveTape {
+    0% {
+      transform: translateX(-140%);
+    }
+    100% {
+      transform: translateX(170%);
+    }
+  }
