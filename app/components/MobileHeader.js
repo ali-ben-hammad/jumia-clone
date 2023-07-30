@@ -10,7 +10,7 @@ export const MobileHeader = () => {
       <div className=" bg-slate-100 text-[#313133]">
         <div className="flex items-center  min-h-[56px] text-custom-gray text-sm">
           <div className="flex items-center  px-2 w-1/2">
-            <Menu />
+            <Menu/>
             <div className="mx-1 p-1">
               <svg role="img" viewBox="0 0 172 30" width="104" height="24">
                 <path
