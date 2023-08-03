@@ -3,6 +3,7 @@ import React from "react";
 import { Dropdown1 } from "./Dropdown1";
 import { Dropdown2 } from "./Dropdown2";
 
+
 export const DesktopHeader = () => {
   return (
     <div className="bg-slate-100 text-custom-gray text-sm">

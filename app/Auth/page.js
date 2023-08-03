@@ -9,7 +9,9 @@ import { useRouter } from "next/navigation";
 const Auth = () => {
   const router = useRouter();
   const [isMobile, setIsMobile] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const [email, setEmail] = useState("");
+  const [error ,setError] = useState("");
 
   const handleContinue = () => {
     console.log(email);
@@ -19,7 +21,6 @@ const Auth = () => {
       //   query: { email: 'dd' },
     });
   };
- 
 
   useEffect(() => {
     const handleResize = () => {
@@ -30,17 +31,16 @@ const Auth = () => {
     // Initial check on componeStant mount
     handleResize();
     // Clean up the event listener on component unmount
-    const isClient = typeof window !== 'undefined';
-    if (!isClient) {    
-        return null;
+    const isClient = typeof window !== "undefined";
+    if (!isClient) {
+      return null;
     }
-  
+
     const queryParams = new URLSearchParams(window.location.search);
-     setEmail(queryParams.get('email') || '');
+    setEmail(queryParams.get("email") || "");
     return () => {
       window.removeEventListener("resize", handleResize);
     };
-  
   }, []);
 
   return (
@@ -58,7 +58,11 @@ const Auth = () => {
         <div className="mb-2 flex items-center justify-center h-16">
           <Image src="/myjumia-top-logo.png" alt="" width="64" height="64" />
         </div>
-        <div className="h-[2px] w-full overflow-hidden">
+        <div
+          className={`h-[2px] w-full overflow-hidden ${
+            isLoading ? "" : "hidden"
+          }`}
+        >
           <div className={`${styles.tape}`}></div>
         </div>
         <div className="py-2 px-6 flex flex-1">
@@ -89,8 +93,9 @@ const Auth = () => {
                   Adresse email ou numéro de téléphone
                 </label>
               </div>
-              <div className="px-4">Erreur de connexion</div>
+              <div className="px-4">{error}</div>
               <Link
+                onClick={() => setIsLoading(true)}
                 href={{ pathname: "/Auth/SignUp", query: { email: email } }}
                 className="mt-4 flex items-center justify-center rounded bg-custom-orange drop-shadow-lg active:bg-orange-300 text-center text-base w-full text-white h-[48px] font-bold"
               >

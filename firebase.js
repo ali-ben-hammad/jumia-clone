@@ -1,6 +1,12 @@
-import firebase from 'firebase/app'
-import 'firebase/firestore'
-import 'firebase/auth'
+import { initializeApp } from 'firebase/app'
+import { getAuth } from 'firebase/auth'
+
+// Your web app's Firebase configuration
+
+
+
+
+
 
 //convert the keys to start with NEXT_PUBLIC
 const firebaseConfig = {
@@ -17,7 +23,7 @@ const firebaseConfig = {
 // give me the 
  
 
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
 
-firebase.initializeApp(firebaseConfig)
-
-export default firebase;
+export { auth, app };

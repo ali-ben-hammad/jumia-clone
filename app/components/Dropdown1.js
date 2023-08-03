@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
+import Link from "next/link";
 
 export const Dropdown1 = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
@@ -28,7 +29,7 @@ export const Dropdown1 = () => {
   return (
     <div
     ref={dropdownRef}
-      className={`p-2 flex relative items-center justify-center rounded cursor-pointer ${
+      className={`p-2 flex relative items-center justify-center rounded cursor-pointer z-10 ${
         !isDropdownOpen
           ? "hover:text-custom-hover-orange"
           : "bg-custom-hover-gray"
@@ -44,7 +45,7 @@ export const Dropdown1 = () => {
       >
         <path d="M4.2 19.89c.44-2.7 2.88-5.55 5.88-5.55h3.84c3 0 5.44 2.84 5.88 5.55H4.2zM12 4.1a4.06 4.06 0 110 8.12 4.06 4.06 0 010-8.12zm7.52 10.68a8.45 8.45 0 00-3.27-2.16A6.18 6.18 0 0012 2a6.17 6.17 0 00-4.25 10.63A8.91 8.91 0 002 20.94V22h20v-1.06c0-2.28-.88-4.46-2.48-6.15z"></path>
       </svg>
-      <span className="whitespace-nowrap">Se connecter</span>
+      <Link href="/Auth" className="whitespace-nowrap">Se connecter</Link>
       <svg
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 24 24"

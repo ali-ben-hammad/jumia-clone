@@ -6,68 +6,67 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
+import { GenderAndBirthdayForm } from "@/app/components/SignUpForms/GenderAndBirthdayForm";
+import NameAndPhoneForm from "@/app/components/SignUpForms/NameAndPhoneForm";
+import { EmailAndPasswordForm } from "@/app/components/SignUpForms/EmailAndPasswordForm";
+
+import { useAuth } from "@/context/AuthContext";
+
 const SignUp = () => {
   //resolving winidow is not defined error
- 
   const [isMobile, setIsMobile] = useState(false);
-  const [password, setpassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
-  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
-  const [passwordError, setPasswordError] = useState("");
-
-  // check if password and confirm password match
-    const [passwordMatch, setPasswordMatch] = useState(false);
-
-
-  const [showPassword, setShowPassword] = useState(false);
   const [email, setEmail] = useState("");
-
-  //helper function to determine if password is strong and return weak, medium or strong without regex
-  const getPasswordStrength = (password) => {
-    //if password has only one character or less than 4 characters return weak
-    if (password.length <= 4) {
-      return "weak";
-    }
-
-    //if contains only the same character return weak
-    if (/^([a-zA-Z0-9])\1+$/.test(password)) {
-      return "weak";
-    }
-    //if password contains more than 8 characters and contains at least one number and one character return strong
-    if (
-      password.length >= 8 &&
-      /\d/.test(password) &&
-      /[a-zA-Z]/.test(password)
-    ) {
-      return "strong";
-    }
-    // else return medium
-    return "medium";
-  };
-
-  const passwordStrength = getPasswordStrength(password);
-
+  const [step, setStep] = useState(3);
+  const [userData, setUserData] = useState({});
+  const { user, createUser } = useAuth();
   useEffect(() => {
     const handleResize = () => {
       setIsMobile(window.innerWidth <= 768); // Adjust the breakpoint as needed
     };
-
-    const queryParams = new URLSearchParams(window.location.search);
-    const emailParam = queryParams.get("email") || "";
-    setEmail(emailParam);
-
-    // Add event listener to handle window resize
     window.addEventListener("resize", handleResize);
-    // Initial check on component mount
     handleResize();
-
-    // Clean up the event listener on component unmount
     return () => {
       window.removeEventListener("resize", handleResize);
     };
   }, []);
+
+  useEffect(() => {
+    const queryParams = new URLSearchParams(window.location.search);
+    const emailParam = queryParams.get("email") || "";
+    setEmail(emailParam);
+  }, []);
+
+  const handleEmailAndPasswordSubmit = (data) => {
+    setUserData({ ...userData, ...data });
+    setStep(2);
+  };
+
+  const handlePhoneAndNameSubmit = (data) => {
+    setUserData({ ...userData, ...data });
+    setStep(3);
+  };
+
+  const handleGenderAndBirthdaySubmit = (data) => {
+    setUserData({ ...userData, ...data });
+    // Now you have all the user data collected from all the forms
+    console.log(userData);
+    // Submit the data to create the user record or handle it accordingly
+    /* createUser(userData.email, userData.password)
+        .then((userCredential) => {
+          // Signed in
+          const user = userCredential.user;
+          console.log(user);
+        })
+        .catch((error) => {
+          const errorCode = error.code;
+          const errorMessage = error.message;
+          console.log(errorCode, errorMessage);
+        });
+        */
+  };
+
   return (
-    <div className="bg-white ">
+    <div className="bg-white overflow-y-auto h-screen ">
       <div className="flex flex-col  h-screen w-[480px] max-w-full min-h-[500px] relative bg-white text-custom-gray my-0 mx-auto">
         <div className="p-2">
           {isMobile && (
@@ -82,156 +81,15 @@ const SignUp = () => {
           <Image src="/myjumia-top-logo.png" alt="" width="64" height="64" />
         </div>
         <div className="py-2 px-6 flex flex-1">
-          <form action="" className="w-full">
-            <div className="text-center w-full">
-              <h2 className="font-bold text-black text-xl ">
-                Créez votre compte
-              </h2>
-              <p className="font-normal text-base mt-2 mb-4 text-custom-gray text-center">
-                Commençons par créer votre compte. Pour assurer la sécurité de
-                votre compte, nous avons besoin d'un mot de passe fort!
-              </p>
-            </div>
-            <div className="pt-4">
-              <div className="mt-8 mb-4 p-4 bg-slate-200 flex justify-between">
-                <div className="flex-1 flex items-center ">{email}</div>
-                <Link
-                  href={{ pathname: "/Auth", query: { email: email } }}
-                  className="text-custom-orange"
-                >
-                  modifier
-                </Link>
-              </div>
-              <div className="relative mt-8 flex text-custom-gray">
-                <input
-                  id="password"
-                  type={showPassword ? "text" : "password"}
-                  className="w-full border border-gray-300 rounded px-3 py-2 outline-none peer focus:border-custom-orange focus:border-2 focus:ring-1 focus:ring-custom-orange focus:ring-opacity-50 transition-all duration-200 ease-in-out placeholder-transparent"
-                  placeholder="Mot de passe"
-                  onChange={(e) => {
-                    setpassword(e.target.value);
-                    getPasswordStrength(e.target.value);
-                  }}
-                />
-                <label
-                  htmlFor="password"
-                  className="absolute left-3 -top-2.5 text-xs text-custom-hover-orange bg-white px-1 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400 peer-placeholder-shown:top-2.5 peer-placeholder-shown:left-3 peer-placeholder-shown:bg-transparent peer-placeholder-shown:px-0 peer-focus:-top-2.5 peer-focus:text-xs peer-focus:text-custom-hover-orange peer-focus:bg-white peer-focus:px-1 transition-all duration-200 ease-in-out"
-                >
-                  Mot de passe
-                </label>
-                <div
-                  className="p-3 absolute right-0"
-                  onClick={() => setShowPassword(!showPassword)}
-                >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    height="24"
-                    width="24"
-                  >
-                    {showPassword ? (
-                      <path
-                        fill="rgba(0,0,0,.54)"
-                        d="M12 16q1.875 0 3.188-1.312Q16.5 13.375 16.5 11.5q0-1.875-1.312-3.188Q13.875 7 12 7q-1.875 0-3.188 1.312Q7.5 9.625 7.5 11.5q0 1.875 1.312 3.188Q10.125 16 12 16Zm0-1.8q-1.125 0-1.912-.788Q9.3 12.625 9.3 11.5t.788-1.913Q10.875 8.8 12 8.8t1.913.787q.787.788.787 1.913t-.787 1.912q-.788.788-1.913.788Zm0 4.8q-3.65 0-6.65-2.038-3-2.037-4.35-5.462 1.35-3.425 4.35-5.463Q8.35 4 12 4q3.65 0 6.65 2.037 3 2.038 4.35 5.463-1.35 3.425-4.35 5.462Q15.65 19 12 19Z"
-                      ></path>
-                    ) : (
-                      <path
-                        fill="rgba(0,0,0,.54)"
-                        d="m19.8 22.6-4.2-4.15q-.875.275-1.762.413Q12.95 19 12 19q-3.775 0-6.725-2.087Q2.325 14.825 1 11.5q.525-1.325 1.325-2.463Q3.125 7.9 4.15 7L1.4 4.2l1.4-1.4 18.4 18.4ZM12 16q.275 0 .512-.025.238-.025.513-.1l-5.4-5.4q-.075.275-.1.513-.025.237-.025.512 0 1.875 1.312 3.188Q10.125 16 12 16Zm7.3.45-3.175-3.15q.175-.425.275-.862.1-.438.1-.938 0-1.875-1.312-3.188Q13.875 7 12 7q-.5 0-.938.1-.437.1-.862.3L7.65 4.85q1.025-.425 2.1-.638Q10.825 4 12 4q3.775 0 6.725 2.087Q21.675 8.175 23 11.5q-.575 1.475-1.512 2.738Q20.55 15.5 19.3 16.45Zm-4.625-4.6-3-3q.7-.125 1.288.112.587.238 1.012.688.425.45.613 1.038.187.587.087 1.162Z"
-                      ></path>
-                    )}
-                  </svg>
-                </div>
-              </div>
-              {/* Password Strength Indicator 
-              and chnages it to show the first 2 when medium and show them all on green when strong */}
-              {password != "" && (
-                <>
-                  <div className="flex w-full mt-4">
-                    {passwordStrength === "strong" && (
-                      <>
-                        <div className="w-1/3 h-[3px] mr-1 rounded bg-green-500"></div>
-                        <div className="w-1/3 h-[3px] mr-1 rounded bg-green-500"></div>
-                        <div className="w-1/3 h-[3px] mr-1 rounded bg-green-500"></div>
-                      </>
-                    )}
-                    {passwordStrength === "medium" && (
-                      <>
-                        <div className="w-1/3 h-[3px] mr-1 rounded bg-yellow-500"></div>
-                        <div className="w-1/3 h-[3px] mr-1 rounded bg-yellow-500"></div>
-                      </>
-                    )}
-                    {passwordStrength === "weak" && (
-                      <>
-                        <div className="w-1/3 h-[3px] mr-1 rounded bg-red-700"></div>
-                      </>
-                    )}
-                  </div>
-
-                  <div
-                    className={`text-right  text-sm ${
-                      passwordStrength === "weak"
-                        ? "text-red-700"
-                        : passwordStrength === "medium"
-                        ? "text-yellow-500"
-                        : "text-green-500"
-                    }`}
-                  >
-                    {passwordStrength}
-                  </div>
-                </>
-              )}
-               <div className="relative mt-8 flex text-custom-gray">
-                <input
-                  id="confirmPassword"
-                  type={showConfirmPassword ? "text" : "password"}
-                  className="w-full border border-gray-300 rounded px-3 py-2 outline-none peer focus:border-custom-orange focus:border-2 focus:ring-1 focus:ring-custom-orange focus:ring-opacity-50 transition-all duration-200 ease-in-out placeholder-transparent"
-                  placeholder="Confirmez le mot de passe"
-                  onChange={(e) => {
-                    setConfirmPassword(e.target.value);
-                    if (e.target.value === password) {
-                        setPasswordMatch(true);
-                        }
-                        else {
-                        setPasswordMatch(false);
-                        }
-                  }}
-                />
-                <label
-                  htmlFor="confirmPassword"
-                  className={`absolute left-3 -top-2.5 text-xs
-                  ${(password!=='' && !passwordMatch) ?'text-red-700 peer-focus:text-red-700':'text-custom-hover-orange peer-focus:text-custom-hover-orange'} 
-                    bg-white px-1 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400 peer-placeholder-shown:top-2.5 peer-placeholder-shown:left-3 peer-placeholder-shown:bg-transparent peer-placeholder-shown:px-0 peer-focus:-top-2.5 peer-focus:text-xs  peer-focus:bg-white peer-focus:px-1 transition-all duration-200 ease-in-out`}
-                >
-                  Confirmez le mot de passe
-                </label>
-                <div
-                  className="p-3 absolute right-0"
-                  onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-                >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    height="24"
-                    width="24"
-                  >
-                    {showConfirmPassword ? (
-                      <path
-                        fill="rgba(0,0,0,.54)"
-                        d="M12 16q1.875 0 3.188-1.312Q16.5 13.375 16.5 11.5q0-1.875-1.312-3.188Q13.875 7 12 7q-1.875 0-3.188 1.312Q7.5 9.625 7.5 11.5q0 1.875 1.312 3.188Q10.125 16 12 16Zm0-1.8q-1.125 0-1.912-.788Q9.3 12.625 9.3 11.5t.788-1.913Q10.875 8.8 12 8.8t1.913.787q.787.788.787 1.913t-.787 1.912q-.788.788-1.913.788Zm0 4.8q-3.65 0-6.65-2.038-3-2.037-4.35-5.462 1.35-3.425 4.35-5.463Q8.35 4 12 4q3.65 0 6.65 2.037 3 2.038 4.35 5.463-1.35 3.425-4.35 5.462Q15.65 19 12 19Z"
-                      ></path>
-                    ) : (
-                      <path
-                        fill="rgba(0,0,0,.54)"
-                        d="m19.8 22.6-4.2-4.15q-.875.275-1.762.413Q12.95 19 12 19q-3.775 0-6.725-2.087Q2.325 14.825 1 11.5q.525-1.325 1.325-2.463Q3.125 7.9 4.15 7L1.4 4.2l1.4-1.4 18.4 18.4ZM12 16q.275 0 .512-.025.238-.025.513-.1l-5.4-5.4q-.075.275-.1.513-.025.237-.025.512 0 1.875 1.312 3.188Q10.125 16 12 16Zm7.3.45-3.175-3.15q.175-.425.275-.862.1-.438.1-.938 0-1.875-1.312-3.188Q13.875 7 12 7q-.5 0-.938.1-.437.1-.862.3L7.65 4.85q1.025-.425 2.1-.638Q10.825 4 12 4q3.775 0 6.725 2.087Q21.675 8.175 23 11.5q-.575 1.475-1.512 2.738Q20.55 15.5 19.3 16.45Zm-4.625-4.6-3-3q.7-.125 1.288.112.587.238 1.012.688.425.45.613 1.038.187.587.087 1.162Z"
-                      ></path>
-                    )}
-                  </svg>
-                </div>
-              </div>
-              <button className="mt-4 rounded bg-custom-orange drop-shadow-lg active:bg-orange-300 text-center text-base w-full text-white h-[48px] font-bold">
-                Continuer
-              </button>
-            </div>
-          </form>
+          {step === 1 && (
+            <EmailAndPasswordForm onSubmit={handleEmailAndPasswordSubmit} email={email} />
+          )}
+          {step === 2 && (
+            <NameAndPhoneForm onSubmit={handlePhoneAndNameSubmit} />
+          )}
+          {step === 3 && (
+            <GenderAndBirthdayForm onSubmit={handleGenderAndBirthdaySubmit} />
+          )}
         </div>
         <div className=" text-sm  bottom-0">
           <div className="w-full px-6 text-center">
