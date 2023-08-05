@@ -2,9 +2,14 @@
 import React from "react";
 import { Dropdown1 } from "./Dropdown1";
 import { Dropdown2 } from "./Dropdown2";
-
+import { useAuth } from "@/context/AuthContext";
+import { useRouter } from "next/router";
+import { useSearchParams } from "next/navigation";
+import { useEffect, useState } from "react";
 
 export const DesktopHeader = () => {
+ 
+  
   return (
     <div className="bg-slate-100 text-custom-gray text-sm">
       <div className="container mx-auto py-4 max-h-24 max-w-[1184px] font-medium  text-base  items-center flex  flex-initial justify-between">

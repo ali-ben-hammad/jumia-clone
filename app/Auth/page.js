@@ -4,22 +4,41 @@ import Link from "next/link";
 import Image from "next/image";
 import styles from "./Auth.module.css";
 import { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
+import { useAuth } from "@/context/AuthContext";
 
 const Auth = () => {
   const router = useRouter();
   const [isMobile, setIsMobile] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
+  const [loading, setLoading] = useState(false);
   const [email, setEmail] = useState("");
-  const [error ,setError] = useState("");
+  const [error, setError] = useState("");
+  const [existingUser, setExistingUser] = useState(false);
+  const { exist } = useAuth();
+  const params = useSearchParams();
 
-  const handleContinue = () => {
-    console.log(email);
-    //got to /Auth/SignUp and pass email as query param
-    router.push({
-      pathname: "/Auth/SignUp",
-      //   query: { email: 'dd' },
-    });
+  const handleContinue = (e) => {
+    e.preventDefault();
+    if (email != "") {
+      setLoading(true);
+
+      console.log(email);
+      //got to /Auth/SignUp and pass email as query param
+      exist(email).then((res) => {
+        console.log(res);
+        if (res.length > 0) {
+          setExistingUser(true);
+          router.push(`/Auth/Login?email=${email}`);
+        } else {
+          setExistingUser(false);
+          router.push(`/Auth/SignUp?email=${email}`);
+        }
+      });
+    }
+
+    existingUser
+      ? router.push(`/Auth/SignIn?email=${email}`)
+      : router.push(`/Auth/SignUp?email=${email}`);
   };
 
   useEffect(() => {
@@ -36,8 +55,8 @@ const Auth = () => {
       return null;
     }
 
-    const queryParams = new URLSearchParams(window.location.search);
-    setEmail(queryParams.get("email") || "");
+    //const queryParams = new URLSearchParams(window.location.search);
+    setEmail(params.get("email") || "");
     return () => {
       window.removeEventListener("resize", handleResize);
     };
@@ -60,13 +79,13 @@ const Auth = () => {
         </div>
         <div
           className={`h-[2px] w-full overflow-hidden ${
-            isLoading ? "" : "hidden"
+            loading ? "" : "hidden"
           }`}
         >
           <div className={`${styles.tape}`}></div>
         </div>
         <div className="py-2 px-6 flex flex-1">
-          <form action="" className="w-full">
+          <form onSubmit={handleContinue} className="w-full">
             <div className="text-center w-full">
               <h2 className="font-bold text-black text-xl ">
                 Bienvenue chez Jumia
@@ -94,13 +113,22 @@ const Auth = () => {
                 </label>
               </div>
               <div className="px-4">{error}</div>
-              <Link
-                onClick={() => setIsLoading(true)}
-                href={{ pathname: "/Auth/SignUp", query: { email: email } }}
+              {/*
+                <Link
+                  onClick={() => setIsLoading(true)}
+                  href={{ pathname: "/Auth/SignUp", query: { email: email } }}
+                  className="mt-4 flex items-center justify-center rounded bg-custom-orange drop-shadow-lg active:bg-orange-300 text-center text-base w-full text-white h-[48px] font-bold"
+                >
+                  Continuer
+                </Link>
+                */}
+              <button
+                type="submit"
                 className="mt-4 flex items-center justify-center rounded bg-custom-orange drop-shadow-lg active:bg-orange-300 text-center text-base w-full text-white h-[48px] font-bold"
               >
                 Continuer
-              </Link>
+              </button>
+
               <button className="mt-16  p-4 rounded font-bold text-white bg-[#1877f2] h-12 w-full flex items-center round ">
                 <svg
                   width="21"
@@ -119,7 +147,7 @@ const Auth = () => {
             </div>
           </form>
         </div>
-        <div className=" text-sm  bottom-0">
+        <div className=" text-sm  bottom-0 mt-auto">
           <div className="w-full px-6 text-center">
             Si besoin d'aide, merci de vous référer au Centre d'Assistance ou de
             contacter notre service client.

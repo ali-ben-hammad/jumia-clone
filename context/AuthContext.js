@@ -5,6 +5,8 @@ import {
   onAuthStateChanged,
   signOut,
   createUserWithEmailAndPassword,
+  fetchSignInMethodsForEmail,
+  updateProfile
 } from "firebase/auth";
 import { auth } from "../firebase";
 
@@ -30,11 +32,38 @@ export const AuthContextProvider = ({ children }) => {
     return signOut(auth);
   };
 
-  const createUser = (email, password) => {
-    return createUserWithEmailAndPassword(auth, email, password);
+  const createUser =  async (email, password, displayName) => {
+
+    try {
+      // Create the user using email and password
+      const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+
+      // Get the user object from the userCredential
+      const user = userCredential.user;
+
+      // Update the user's displayName
+      await updateProfile(user, { displayName });
+      
+
+      // User registration is complete with displayName set
+      console.log("User registered successfully with displayName:", displayName);
+
+      return user;
+    } catch (error) {
+      console.error("Error creating user:", error.message);
+      throw error; // Propagate the error for handling in the calling component
+    }
+      
+
   };
 
-  const value = { user, login, logout, createUser };
+  const exist = (email) => {
+    console.log("exists "+ email);
+    return fetchSignInMethodsForEmail(auth, email);
+  };
+
+
+  const value = { user, login, logout, createUser, exist };
 
   return (
     <AuthContext.Provider value={value}>

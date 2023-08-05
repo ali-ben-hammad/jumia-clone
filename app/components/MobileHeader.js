@@ -1,16 +1,28 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Menu } from "./Menu/Menu";
+import { useAuth } from "@/context/AuthContext";
 import Link from "next/link";
 
 export const MobileHeader = () => {
+  const { user, logout } = useAuth();
+  const [loggedIn, setLoggedIn] = useState(false);
+  useEffect(() => {
+    console.log("user", user);
+    if (user) {
+      setLoggedIn(true);
+    } else {
+      setLoggedIn(false);
+    }
+  }, [user]);
+
   return (
     <>
       {" "}
       <div className=" bg-slate-100 text-[#313133]">
         <div className="flex items-center  min-h-[56px] text-custom-gray text-sm">
           <div className="flex items-center  px-2 w-1/2">
-            <Menu/>
+            <Menu />
             <div className="mx-1 p-1">
               <svg role="img" viewBox="0 0 172 30" width="104" height="24">
                 <path
@@ -35,7 +47,11 @@ export const MobileHeader = () => {
                 width="24"
                 height="24"
               >
-                <path d="M4.2 19.89c.44-2.7 2.88-5.55 5.88-5.55h3.84c3 0 5.44 2.84 5.88 5.55H4.2zM12 4.1a4.06 4.06 0 110 8.12 4.06 4.06 0 010-8.12zm7.52 10.68a8.45 8.45 0 00-3.27-2.16A6.18 6.18 0 0012 2a6.17 6.17 0 00-4.25 10.63A8.91 8.91 0 002 20.94V22h20v-1.06c0-2.28-.88-4.46-2.48-6.15z"></path>
+                {!loggedIn ? (
+                  <path d="M4.2 19.89c.44-2.7 2.88-5.55 5.88-5.55h3.84c3 0 5.44 2.84 5.88 5.55H4.2zM12 4.1a4.06 4.06 0 110 8.12 4.06 4.06 0 010-8.12zm7.52 10.68a8.45 8.45 0 00-3.27-2.16A6.18 6.18 0 0012 2a6.17 6.17 0 00-4.25 10.63A8.91 8.91 0 002 20.94V22h20v-1.06c0-2.28-.88-4.46-2.48-6.15z"></path>
+                ) : (
+                  <path d="M18 13.01a5 5 0 110 10 5 5 0 010-10zM12.02 1a6.15 6.15 0 014.18 10.65c-1.2.24-2.28.83-3.14 1.64h-2.97c-1.3 0-2.7.6-3.82 1.63a6.99 6.99 0 00-2.2 4.12h7.04c.12.7.34 1.38.66 1.99H2v-1a8.92 8.92 0 015.87-8.35A6.16 6.16 0 0112 1zm8.73 14.8a.6.6 0 00-.42.18l-3.2 3.2-1.42-1.46a.6.6 0 00-.43-.18.6.6 0 00-.43 1l1.84 1.9a.6.6 0 00.85.01l3.63-3.63a.6.6 0 000-.84.59.59 0 00-.42-.18zM12.01 2.98a4.17 4.17 0 10.01 8.34 4.17 4.17 0 000-8.34z"></path>
+                )}
               </svg>
             </Link>
             <Link

@@ -93,9 +93,9 @@ const NameAndPhoneForm = ({onSubmit}) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if(firstName.length >= 2 && lastName.length >= 2 &&  isPhoneValid && phoneNumber.length >= 8){
-      
-      console.log(firstName, lastName,  prefixe+phoneNumber);
-      onSubmit(firstName, lastName,  prefixe+phoneNumber);
+      let phone  =   prefixe+phoneNumber
+      console.log({firstName, lastName,phone});
+      onSubmit({firstName, lastName,phone});
 
     }
   };
