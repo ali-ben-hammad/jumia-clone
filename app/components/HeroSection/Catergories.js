@@ -5,7 +5,7 @@ import categoriesData from "public/categoriesData.json";
 
 export const Catergories = () => {
   return (
-    <ul className="list-none">
+    <div className="list-none flex flex-col h-full justify-between p-2">
       {categoriesData.map((category) => (
         <Link
           href={"#"}
@@ -23,6 +23,6 @@ export const Catergories = () => {
           <span className="text-xs">{category.name}</span>
         </Link>
       ))}
-    </ul>
+    </div>
   );
 };
