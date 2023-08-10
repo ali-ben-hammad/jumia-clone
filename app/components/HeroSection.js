@@ -9,7 +9,7 @@ export const HeroSection = () => {
   const [isMobile, setIsMobile] = useState(false);
   useEffect(() => {
     const handleResize = () => {
-      setIsMobile(window.innerWidth <= 954); // Adjust the breakpoint as needed
+      setIsMobile(window.innerWidth <= 930); // Adjust the breakpoint as needed
     };
     // Add event listener to handle window resize
     window.addEventListener("resize", handleResize);

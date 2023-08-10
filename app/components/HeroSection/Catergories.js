@@ -1,15 +1,18 @@
 import React from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 import categoriesData from "public/categoriesData.json";
 
 export const Catergories = () => {
+  const router = useRouter();
   return (
     <div className="list-none flex flex-col h-full justify-between p-2">
       {categoriesData.map((category) => (
         <Link
-          href={"#"}
+          href={"/" + decodeURIComponent(category.name)}
           className="mg pl-2 h-8 flex items-center hover:text-custom-hover-orange"
+          key={category.name}
         >
           <svg
             viewBox="0 0 24 24"

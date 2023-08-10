@@ -8,12 +8,10 @@ import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 
 export const DesktopHeader = () => {
- 
-  
   return (
     <div className="bg-slate-100 text-custom-gray text-sm">
       <div className="container mx-auto py-4 max-h-24 max-w-[1184px] font-medium  text-base  items-center flex  flex-initial justify-between">
-        <div className="px-2 min-w-[18.75%]">
+        <div className="px-2 sm:min-w-[18.75%]">
           <svg role="img" viewBox="0 0 172 30" width="134" height="30">
             <path
               fill="#282828"
