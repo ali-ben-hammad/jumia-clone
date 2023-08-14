@@ -35,9 +35,12 @@ export default function RootLayout({ children }) {
       </Head>
       <body>
         <AuthContextProvider>
-          {!isAuthPage ? null : <Header />}
-
-          <main>{children}</main>
+          {isAuthPage ? null : <Header />}
+          <div className="bg-blue-200">
+            <div className="container mx-auto max-w-[1184px] text-custom-gray h-screen">
+              <main>{children}</main>
+            </div>
+          </div>
         </AuthContextProvider>
       </body>
     </html>

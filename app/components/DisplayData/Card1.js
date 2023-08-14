@@ -21,8 +21,8 @@ export const Card1 = ({ product }) => {
           <Image
             src={imagePath}
             alt={product_name}
-            width={300}
-            height={300}
+            width={225}
+            height={225}
             layout="fixed"
             objectFit="cover"
           />

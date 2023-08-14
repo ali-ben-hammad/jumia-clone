@@ -5,6 +5,9 @@ import { HeroSection } from "./components/HeroSection";
 import { TopDeals } from "./components/HomeFilters/TopDeals";
 import productsData from "/public/productsData.json";
 import { db } from "../firebase";
+import { query, updateDoc, where } from "firebase/firestore";
+
+import RootLayout from "./layout";
 import {
   collection,
   addDoc,
@@ -66,7 +69,6 @@ const insertDataInBatches = async () => {
     console.error("An error occurred:", error);
   }
 };
-<button onClick={() => insertDataInBatches()}>yoo</button>;
 */
 
 const countProducts = async () => {
@@ -81,15 +83,67 @@ countProducts();
 
 export default function Home() {
   return (
-    <div className="bg-blue-200">
-      <Header />
-      <div className="container mx-auto max-w-[1184px] text-custom-gray h-screen">
-        <div className="">
-          <HeroSection />
-
-          <TopDeals />
-        </div>
-      </div>
+    <div className="">
+      <HeroSection />
+      <TopDeals />
     </div>
   );
 }
+/*
+const knownBrands = [
+  "Apple",
+  "Samsung",
+  " Accent",
+  "Huawei",
+  "Xiaomi",
+  "LG",
+  "Nokia",
+  "Oppo",
+  "Realme",
+  "Sony",
+  "Tecno",
+  "Itel",
+];
+
+const updateProducts = async () => {
+  try {
+    const productsRef = collection(db, "products");
+    const q = query(
+      productsRef,
+      where("category", "==", "Téléphone & Tablette")
+      );
+      
+      //    const q = query(productsRef, where("category", "==", decodedCategory));
+      
+      try {
+        const querySnapshot = await getDocs(q);
+        const productsData = [];
+        querySnapshot.forEach(async (doc) => {
+          const productData = doc.data();
+          const updatedBrand =
+          knownBrands[Math.floor(Math.random() * knownBrands.length)]; // Select a random brand from the array
+          const productRef = doc.ref;
+          
+          try {
+          await updateDoc(productRef, {
+            brand: updatedBrand,
+          });
+          console.log(
+            `Brand updated for product with ID: ${doc.id} to: ${updatedBrand}`
+            );
+          } catch (error) {
+            console.error(
+              `Error updating brand for product with ID: ${doc.id}`,
+              error
+              );
+            }
+          });
+        } catch (error) {
+      console.error("Error fetching products:", error);
+    }
+  } catch (error) {
+    console.error("Error updating products:", error);
+  }
+};
+<button onClick={() => updateProducts()}>yoo</button>;
+*/

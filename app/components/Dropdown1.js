@@ -52,7 +52,7 @@ export const Dropdown1 = () => {
     >
       <svg
         viewBox="0 0 24 24"
-        className="mr-2 flex-shrink-0"
+        className="flex-shrink-0 mr-2"
         width="24"
         height="24"
         fill="currentColor"
@@ -89,9 +89,9 @@ export const Dropdown1 = () => {
       </svg>
 
       {isDropdownOpen && (
-        <div className="absolute rounded shadow-[0_0_10px_0_rgba(0,0,0,0.15)] top-full text-sm bg-white font-normal w-full min-w-[206px]">
+        <div className="absolute rounded shadow-[0_0_10px_0_rgba(0,0,0,0.15)] z-99 top-full text-sm bg-white font-normal w-full min-w-[206px]">
           {!loggedIn && (
-            <div className="p-4 flex  items-center justify-center border-b ">
+            <div className="flex items-center justify-center p-4 border-b ">
               <Link
                 href="/Auth"
                 className="py-3 px-4 w-full text-sm cursor-pointer whitespace-nowrap text-white leading-4 hover:bg-custom-hover-orange shadow-[0_4px_8px_0_rgba(0,0,0,0.2)] felx items-center justify text-center uppercase bg-custom-orange rounded"
@@ -134,9 +134,9 @@ export const Dropdown1 = () => {
             Votre liste d'envies
           </a>
           {loggedIn && (
-            <div className="px-6 py-2 flex items-center justify-center border-t cursor-default  ">
+            <div className="flex items-center justify-center px-6 py-2 border-t cursor-default ">
               <button
-                className=" uppercase p-2  text-custom-orange  text-center hover:bg-orange-100 rounded-lg"
+                className="p-2 text-center uppercase rounded-lg text-custom-orange hover:bg-orange-100"
                 onClick={handleLogout}
               >
                 Déconnexion
