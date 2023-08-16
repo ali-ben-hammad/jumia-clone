@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import { MenuItems } from "./MenuItems";
+import { MobileCategories } from "../MobileCategories";
 
 export const Menu = ({ onMenuToggle }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -12,7 +13,7 @@ export const Menu = ({ onMenuToggle }) => {
     <>
       {" "}
       <div
-        className="p-2 flex-shrink-0 cursor-pointer"
+        className="flex-shrink-0 p-2 cursor-pointer"
         onClick={() => handleMenuToggle()}
       >
         <svg aria-label="Menu" className="ic -db" width="24" height="24">
@@ -27,7 +28,7 @@ export const Menu = ({ onMenuToggle }) => {
       ></div>
       {isMenuOpen && (
         <div className="fixed w-[87vw] bg-white overflow-y-auto top-0 bottom-0 left-0">
-          <div className="p-4 flex">
+          <div className="flex p-4">
             <div className="mr-4">
               <svg
                 onClick={() => handleMenuToggle()}
@@ -54,7 +55,7 @@ export const Menu = ({ onMenuToggle }) => {
           </div>
 
           <MenuItems />
-          
+          <MobileCategories />
         </div>
       )}
     </>

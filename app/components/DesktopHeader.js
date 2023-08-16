@@ -1,17 +1,45 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import { Dropdown1 } from "./Dropdown1";
 import { Dropdown2 } from "./Dropdown2";
-import { useAuth } from "@/context/AuthContext";
-import { useRouter } from "next/router";
-import { useSearchParams } from "next/navigation";
-import { useEffect, useState } from "react";
+import Link from "next/link";
+import categoriesData from "public/categoriesData.json";
+import { usePathname } from "next/navigation";
 
 export const DesktopHeader = () => {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  const pathname = usePathname();
   return (
-    <div className="bg-slate-100 text-custom-gray text-sm">
+    <div className="text-sm bg-slate-100 text-custom-gray">
       <div className="container mx-auto py-4 max-h-24 max-w-[1184px] font-medium  text-base  items-center flex  flex-initial justify-between">
-        <div className="px-2 sm:min-w-[18.75%]">
+        {pathname !== "/" && (
+          <div className="relative z-20 flex-shrink-0 p-2 cursor-pointer group drop-shadow-md">
+            <svg aria-label="Menu" className="ic -db" width="24" height="24">
+              <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"></path>
+            </svg>
+            <div className="absolute z-20 hidden w-64 transition-all duration-300 bg-white rounded cursor-default top-10 group-hover:block group-hover:pointer-events-auto">
+              {categoriesData.map((category) => (
+                <Link
+                  href={"/" + decodeURIComponent(category.name)}
+                  className="py-2 px-3 min-h-[30px]  hover:text-custom-orange  focus:bg-[#fcdbb9] flex items-center w-full"
+                >
+                  <svg
+                    aria-label="Menu"
+                    className="mr-2"
+                    width="24"
+                    height="24"
+                    fill="currentColor"
+                  >
+                    <path d={category.pathData}></path>
+                  </svg>
+                  {category.name}
+                </Link>
+              ))}
+            </div>
+          </div>
+        )}
+        <Link href="/" className="px-2 sm:min-w-[18.75%] cursor-pointer">
           <svg role="img" viewBox="0 0 172 30" width="134" height="30">
             <path
               fill="#282828"
@@ -22,14 +50,14 @@ export const DesktopHeader = () => {
               d="M157.72.52a13.71 13.71 0 1 0 0 27.43 13.71 13.71 0 0 0 0-27.43Zm6.26 22.24-6.26-3.28-6.26 3.28 1.2-6.97-5.04-4.92 7-1.01 3.07-6.35 3.07 6.35 7 1.01-5.04 4.92 1.26 6.97Z"
             ></path>
           </svg>
-        </div>
-        <form className="flex flex-grow-1 w-full  h-full max-w-full px-2">
-          <div className="flex items-center rounded  border w-full border-gray-400">
+        </Link>
+        <form className="flex w-full h-full max-w-full px-2 flex-grow-1">
+          <div className="flex items-center w-full border border-gray-400 rounded">
             <svg
               viewBox="0 0 24 24"
               width="24"
               height="24"
-              className="mx-2 flex-shrink-0"
+              className="flex-shrink-0 mx-2"
             >
               <path d="M20.773 18.51l-4.322-4.464c-.31-.32-.697-.449-.865-.285-.168.163-.556.035-.866-.286l-.061-.064A6.488 6.488 0 0 0 4.9 4.901a6.491 6.491 0 0 0 8.641 9.661l.027.029c.31.32.425.711.256.874-.168.163-.054.555.256.875l4.32 4.466c.31.32.82.33 1.141.02l1.213-1.174c.32-.31.328-.82.018-1.141zm-8.117-5.855a4.48 4.48 0 0 1-6.328 0 4.48 4.48 0 0 1 0-6.328 4.479 4.479 0 0 1 6.327 0 4.48 4.48 0 0 1 0 6.328z"></path>
             </svg>
@@ -37,7 +65,7 @@ export const DesktopHeader = () => {
             <input
               type="text"
               placeholder="Cherchez un produit, une marque ou une catégorie"
-              className="bg-inherit w-full flex-grow-1 outline-none"
+              className="w-full outline-none bg-inherit flex-grow-1"
               name=""
               id=""
             />
@@ -49,10 +77,10 @@ export const DesktopHeader = () => {
         <div className="flex">
           <Dropdown1 />
           <Dropdown2 />
-          <div className="p-2 flex relative items-center justify-center rounded cursor-pointer hover:text-custom-hover-orange">
+          <div className="relative flex items-center justify-center p-2 rounded cursor-pointer hover:text-custom-hover-orange">
             <svg
               viewBox="0 0 24 24"
-              className="mr-2 flex-shrink-0"
+              className="flex-shrink-0 mr-2"
               width="24"
               height="24"
               fill="currentColor"

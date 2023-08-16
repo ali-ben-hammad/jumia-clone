@@ -7,16 +7,16 @@ import categoriesData from "public/categoriesData.json";
 export const Catergories = () => {
   const router = useRouter();
   return (
-    <div className="list-none flex flex-col h-full justify-between p-2">
+    <div className="flex flex-col justify-between h-full p-2 list-none">
       {categoriesData.map((category) => (
         <Link
           href={"/" + decodeURIComponent(category.name)}
-          className="mg pl-2 h-8 flex items-center hover:text-custom-hover-orange"
+          className="flex items-center h-8 pl-2 mg hover:text-custom-hover-orange"
           key={category.name}
         >
           <svg
             viewBox="0 0 24 24"
-            className="ic -mrxs -fsh0 mr-2"
+            className="mr-2 ic -mrxs -fsh0"
             width="20"
             height="20"
             fill="currentColor"

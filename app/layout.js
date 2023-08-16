@@ -33,13 +33,12 @@ export default function RootLayout({ children }) {
           <meta name="description" content="Description of the Login page" />
         </style>
       </Head>
-      <body>
+      <body className="bg-blue-200 bg-cover bg-gradient-conic ">
         <AuthContextProvider>
           {isAuthPage ? null : <Header />}
-          <div className="bg-blue-200">
-            <div className="container mx-auto max-w-[1184px] text-custom-gray h-screen">
-              <main>{children}</main>
-            </div>
+
+          <div className="container mx-auto max-w-[1184px] text-custom-gray h-screen">
+            <main>{children}</main>
           </div>
         </AuthContextProvider>
       </body>

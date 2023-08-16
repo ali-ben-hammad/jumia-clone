@@ -17,13 +17,13 @@ export const MobileHeader = () => {
   }, [user]);
 
   return (
-    <>
+    <div className="relative z-10 ">
       {" "}
-      <div className=" bg-slate-100 text-[#313133]">
+      <div className=" bg-slate-100 text-[#313133] z-50">
         <div className="flex items-center  min-h-[56px] text-custom-gray text-sm">
-          <div className="flex items-center  px-2 w-1/2">
+          <div className="flex items-center w-1/2 px-2">
             <Menu />
-            <div className="mx-1 p-1">
+            <div className="p-1 mx-1">
               <svg role="img" viewBox="0 0 172 30" width="104" height="24">
                 <path
                   fill="#282828"
@@ -36,7 +36,7 @@ export const MobileHeader = () => {
               </svg>
             </div>
           </div>
-          <div className="px-2 w-1/2 flex justify-end">
+          <div className="flex justify-end w-1/2 px-2">
             <Link
               className="p-2 mx-2 flex-shrink-0 outline-none rounded-full inline-block focus:bg-[#fcdbb9]"
               href=""
@@ -65,7 +65,7 @@ export const MobileHeader = () => {
           </div>
         </div>
         <div className="px-2 pb-2">
-          <button className="py-1 w-full px-2 flex items-center rounded-full border border-solid border-gray-400">
+          <button className="flex items-center w-full px-2 py-1 border border-gray-400 border-solid rounded-full">
             <svg className="mr-1" fill="currentColor" width="24" height="24">
               <path d="m20.7735 18.5109-4.3221-4.465c-.31-.3204-.6973-.4487-.8651-.2849-.1684.1626-.556.0347-.866-.2857l-.0618-.064c1.9344-2.5442 1.7467-6.187-.5763-8.5099-2.5352-2.5352-6.6458-2.5352-9.1808 0-2.5352 2.5353-2.5352 6.6453 0 9.1806 2.3625 2.3628 6.0913 2.521 8.6407.4803l.0271.0283c.3094.3204.4246.7118.2557.8746-.1681.163-.0538.5546.2565.8744l4.3197 4.4668c.31.3195.8206.329 1.1413.0188l1.2123-1.173c.3195-.3095.3281-.8198.0188-1.1413zm-8.1179-5.8556c-1.7446 1.7449-4.5837 1.7449-6.328.0006-1.7447-1.7447-1.7445-4.5841 0-6.3284 1.7443-1.7447 4.5834-1.7444 6.3275.0002 1.7449 1.7444 1.7449 4.5832.0005 6.3276z"></path>
             </svg>
@@ -73,6 +73,6 @@ export const MobileHeader = () => {
           </button>
         </div>
       </div>
-    </>
+    </div>
   );
 };

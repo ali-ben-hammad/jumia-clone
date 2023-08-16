@@ -17,7 +17,10 @@ export const Card2 = ({ product }) => {
   const discountPrice = (price - (price * discount) / 100).toFixed(2);
 
   return (
-    <Link href="#" className="flex flex-col col-span-1 m-2 flex-grow-1">
+    <Link
+      href="#"
+      className="flex flex-col justify-center col-span-1 m-2 -z-0 flex-grow-1"
+    >
       <div className=" hover:scale-[102%] p-2 box-border hover:drop-shadow-xl group  duration-300">
         <div className="relative">
           <Image
