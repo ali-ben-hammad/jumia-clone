@@ -21,6 +21,7 @@ export const DesktopHeader = () => {
             <div className="absolute z-20 hidden w-64 transition-all duration-300 bg-white rounded cursor-default top-10 group-hover:block group-hover:pointer-events-auto">
               {categoriesData.map((category) => (
                 <Link
+                  key={category.name}
                   href={"/" + decodeURIComponent(category.name)}
                   className="py-2 px-3 min-h-[30px]  hover:text-custom-orange  focus:bg-[#fcdbb9] flex items-center w-full"
                 >

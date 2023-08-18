@@ -3,7 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 export const ProductCard = ({ props }) => {
-  const { product_name, image, price, discount, category } = props;
+  const { id, product_name, image, price, discount, category } = props;
   // remove the public folder from the image path
   const imagePath = image.replace("/public", "/images");
   //cut the product name if it is too long
@@ -16,8 +16,8 @@ export const ProductCard = ({ props }) => {
   const discountPrice = (price - (price * discount) / 100).toFixed(2);
 
   return (
-    <Link href="#">
-      <div className=" hover:scale-105 m-2  duration-300">
+    <Link href={"/products" + id}>
+      <div className="m-2 duration-300 hover:scale-105">
         <div className="relative">
           <Image
             src={imagePath}
@@ -30,7 +30,7 @@ export const ProductCard = ({ props }) => {
           <div className="">{productName}</div>
           <div className="">{discountPrice}</div>
           <div className="line-through">{price}</div>
-          <div className="absolute top-2 right-2 bg-orange-100 rounded text-custom-orange">
+          <div className="absolute bg-orange-100 rounded top-2 right-2 text-custom-orange">
             -{discount}%
           </div>
         </div>

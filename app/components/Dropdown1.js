@@ -70,7 +70,7 @@ export const Dropdown1 = () => {
           Bonjour,{" "}
           {
             // if the name is too long , show only the first 8 characters
-            user.displayName.length > 8
+            user.displayName && user.displayName.length > 8
               ? user.displayName.substring(0, 8) + "..."
               : user.displayName
           }
