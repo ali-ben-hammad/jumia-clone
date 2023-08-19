@@ -1,17 +1,25 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import { useRouter, useParams } from "next/navigation";
-import { doc, getDoc, query, where, setDoc } from "firebase/firestore";
+import {
+  doc,
+  getDoc,
+  query,
+  where,
+  setDoc,
+  collection,
+  getDocs,
+} from "firebase/firestore";
 import { db } from "@/firebase";
 import Image from "next/image";
 import { useAuth } from "@/context/AuthContext";
-import { handleClientScriptLoad } from "next/script";
 import Link from "next/link";
 import Rating from "@mui/material/Rating";
-import addToCart from "@/app/functions";
+import AddToCart from "@/app/components/AddToCart";
 
 const Product = () => {
   const [product, setProduct] = useState(null);
+  const [added, setAdded] = useState(false);
   var discountPrice = 0;
   if (product)
     discountPrice = (
@@ -19,17 +27,47 @@ const Product = () => {
       (product.price * product.discount) / 100
     ).toFixed(2);
   const { user } = useAuth();
-  if (user) console.log(user.uid);
+
   const { id } = useParams();
-  console.log(id);
+  // console.log(id);
   const router = useRouter();
 
   useEffect(() => {
     const getProduct = async () => {
-      const docRef = doc(db, "products", id);
-      const docSnap = await getDoc(docRef);
-      setProduct(docSnap.data());
+      // Create a query to find the product with the matching "id" field
+      // The "id" field is a custom field we created for each product
+      // convert the id to a number
+
+      const pID = parseInt(id);
+
+      const q = query(collection(db, "products"), where("id", "==", pID));
+      const querySnapshot = await getDocs(q);
+
+      // Check if a matching product was found
+      if (!querySnapshot.empty) {
+        // Get the first document from the query results
+        const productDoc = querySnapshot.docs[0];
+
+        // Set the product state using the document data
+        setProduct(productDoc.data());
+      } else {
+        // Handle case when product with the specified ID was not found
+        console.error(`Product with ID "${id}" not found`);
+      }
     };
+
+    const checkWishList = async () => {
+      if (user) {
+        const wishListRef = doc(db, "wishlists", user.uid);
+        const docSnap = await getDoc(wishListRef);
+        const wishList = docSnap.data();
+        if (wishList.products.includes(parseInt(id))) {
+          setAdded(true);
+        }
+      }
+    };
+
+    checkWishList();
 
     getProduct();
   }, [id]);
@@ -82,11 +120,9 @@ const Product = () => {
     }
   };
 
-  const [added, setAdded] = useState(false);
-
   const handleAddToCart = async () => {
     if (user) {
-      await addToCart(product.id, user.uid, product.price);
+      await addToCart(user.uid, product.id, product.price);
       alert("Ajouté au panier");
     } else {
       router.push("/login");
@@ -148,21 +184,11 @@ const Product = () => {
                   readOnly
                 />
               </div>
-              <button
-                onClick={() => handleAddToCart()}
-                className="w-full flex items-center px-3 group-hover:flex mx-2 py-3 h-12 cursor-pointer text-white  leading-4 hover:bg-custom-hover-orange shadow-[0_4px_8px_0_rgba(0,0,0,0.2)]   text-center uppercase bg-custom-orange rounded"
-              >
-                <svg
-                  viewBox="0 0 24 24"
-                  className="ic -f-or5"
-                  width="24"
-                  height="24"
-                  fill="currentColor"
-                >
-                  <path d="M11 9h2V6h3V4h-3V1h-2v3H8v2h3v3zm-4 9a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm10 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-9.8-3.3.9-1.7h7.5a2 2 0 0 0 1.7-1l3.9-7-1.8-1-1 2-2.8 5h-7l-.2-.3L6.2 6l-1-2-1-2H1v2h2l3.6 7.6L5.2 14A2 2 0 0 0 7 17h12v-2H7.4a.3.3 0 0 1-.2-.3z"></path>
-                </svg>
-                <span className="mx-auto">J'Achète</span>
-              </button>
+              <AddToCart
+                productId={product.id}
+                productPrice={product.price}
+                stock={product.stock}
+              />
               <div className="py-2 my-4 border-t border-gray-300 ">
                 {product.text}
               </div>

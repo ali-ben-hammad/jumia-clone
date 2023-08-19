@@ -16,7 +16,7 @@ export const ProductCard = ({ props }) => {
   const discountPrice = (price - (price * discount) / 100).toFixed(2);
 
   return (
-    <Link href={"/products" + id}>
+    <Link href={"/products/" + id}>
       <div className="m-2 duration-300 hover:scale-105">
         <div className="relative">
           <Image

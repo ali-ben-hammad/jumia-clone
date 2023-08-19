@@ -10,7 +10,7 @@ export const Dropdown1 = () => {
   const { user, logout } = useAuth();
   const [loggedIn, setLoggedIn] = useState(false);
   useEffect(() => {
-    console.log("user", user);
+    // console.log("user", user);
     if (user) {
       setLoggedIn(true);
     } else {

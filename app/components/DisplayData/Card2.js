@@ -2,9 +2,13 @@ import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import Rating from "@mui/material/Rating";
+import AddToCart from "../AddToCart";
+import { useRouter } from "next/navigation";
 
 export const Card2 = ({ product }) => {
-  const { product_name, image, price, discount, category, rating } = product;
+  const { product_name, image, price, discount, stock, category, rating, id } =
+    product;
+  const router = useRouter();
   // remove the public folder from the image path
   const imagePath = image.replace("/public", "/images");
   //cut the product name if it is too long
@@ -16,10 +20,15 @@ export const Card2 = ({ product }) => {
   // calculate the discount price and round it to 2 decimal places
   const discountPrice = (price - (price * discount) / 100).toFixed(2);
 
+  // got to the product page when the user clicks on the card
+  const handleClick = () => {
+    router.push(`/products/${id}`);
+  };
+
   return (
-    <Link
-      href="#"
+    <div
       className="flex flex-col justify-center col-span-1 m-2 -z-0 flex-grow-1"
+      onClick={() => handleClick}
     >
       <div className=" hover:scale-[102%] p-2 box-border hover:drop-shadow-xl group  duration-300">
         <div className="relative">
@@ -47,12 +56,20 @@ export const Card2 = ({ product }) => {
             readOnly
           />
         </div>
-        <div className="w-full h-10 ">
-          <div className=" hidden group-hover:flex mx-2 py-3 px-4 cursor-pointer text-white text-sm leading-4 hover:bg-custom-hover-orange shadow-[0_4px_8px_0_rgba(0,0,0,0.2)] felx items-center justify text-center uppercase bg-custom-orange rounded">
-            Ajouter au panier
+        <div
+          className="w-full h-10 "
+          onClick={
+            // do not go to the product page if the user clicks on the add to cart button
+            (e) => {
+              e.stopPropagation();
+            }
+          }
+        >
+          <div className="hidden group-hover:flex">
+            <AddToCart productId={id} productPrice={price} stock={stock} />
           </div>
         </div>
       </div>
-    </Link>
+    </div>
   );
 };
