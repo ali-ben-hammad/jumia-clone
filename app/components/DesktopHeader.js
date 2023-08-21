@@ -5,6 +5,7 @@ import { Dropdown2 } from "./Dropdown2";
 import Link from "next/link";
 import categoriesData from "public/categoriesData.json";
 import { usePathname } from "next/navigation";
+import { Cart } from "./Cart";
 
 export const DesktopHeader = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -78,18 +79,7 @@ export const DesktopHeader = () => {
         <div className="flex">
           <Dropdown1 />
           <Dropdown2 />
-          <div className="relative flex items-center justify-center p-2 rounded cursor-pointer hover:text-custom-hover-orange">
-            <svg
-              viewBox="0 0 24 24"
-              className="flex-shrink-0 mr-2"
-              width="24"
-              height="24"
-              fill="currentColor"
-            >
-              <path d="M15.55 13a2 2 0 0 0 1.75-1.03l3.58-6.49A1 1 0 0 0 20.01 4H5.21l-.94-2H1v2h2l3.6 7.59-1.35 2.44A2 2 0 0 0 7 17h12v-2H7l1.1-2h7.45zM6.16 6h12.15l-2.76 5H8.53L6.16 6zM7 18a2 2 0 1 0 .01 4A2 2 0 0 0 7 18zm10 0a2 2 0 1 0 .01 4 2 2 0 0 0-.01-4z"></path>{" "}
-            </svg>
-            <span className="whitespace-nowrap">Panier</span>
-          </div>
+          <Cart />
         </div>
       </div>
     </div>

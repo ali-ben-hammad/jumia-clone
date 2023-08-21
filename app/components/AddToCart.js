@@ -46,16 +46,13 @@ const AddToCart = ({ productId, productPrice, stock }) => {
         router.push("/login");
       }
       cartRef = doc(db, "carts", user.uid || "");
-
       const cartDoc = await getDoc(cartRef);
       if (cartDoc.exists()) {
         const cartData = cartDoc.data();
-
         // Check if the product already exists in the cart
         const existingProduct = cartData.products.find(
           (product) => product.productId === productId
         );
-
         if (existingProduct) {
           setInCart(true);
           setCount(existingProduct.quantity);
@@ -68,12 +65,11 @@ const AddToCart = ({ productId, productPrice, stock }) => {
         setCount(0);
       }
     };
-
     fetchCart();
   }, [user, productId, cartRef]);
 
   return (
-    <div className="flex items-center">
+    <div className="flex items-center w-full">
       {!inCart ? (
         <button
           onClick={() => handleAddToCart()}
@@ -91,21 +87,21 @@ const AddToCart = ({ productId, productPrice, stock }) => {
           <span className="mx-auto">J'Achète</span>
         </button>
       ) : (
-        <>
+        <div className="flex items-center justify-center w-full">
           <button
-            className=" flex items-center px-3 mx-2 py-3 h-12 cursor-pointer text-white  leading-4 hover:bg-custom-hover-orange shadow-[0_4px_8px_0_rgba(0,0,0,0.2)]   text-center uppercase bg-custom-orange rounded"
+            className=" flex items-center px-3 w-12  mx-2 mr-auto py-3 h-12 cursor-pointer text-white  text-4xl hover:bg-custom-hover-orange shadow-[0_4px_8px_0_rgba(0,0,0,0.2)]   text-center uppercase bg-custom-orange rounded"
             onClick={handleDecrement}
           >
             -
           </button>
           <span className="px-2">{count}</span>
           <button
-            className=" flex items-center px-3 mx-2 py-3 h-12 cursor-pointer text-white  leading-4 hover:bg-custom-hover-orange shadow-[0_4px_8px_0_rgba(0,0,0,0.2)]   text-center uppercase bg-custom-orange rounded"
+            className=" flex items-center px-3 w-12  mx-2 ml-auto py-3 h-12 cursor-pointer text-white  text-4xl hover:bg-custom-hover-orange shadow-[0_4px_8px_0_rgba(0,0,0,0.2)]   text-center uppercase bg-custom-orange rounded"
             onClick={handleIncrement}
           >
             +
           </button>
-        </>
+        </div>
       )}
     </div>
   );

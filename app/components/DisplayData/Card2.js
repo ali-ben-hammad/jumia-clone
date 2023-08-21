@@ -28,7 +28,7 @@ export const Card2 = ({ product }) => {
   return (
     <div
       className="flex flex-col justify-center col-span-1 m-2 -z-0 flex-grow-1"
-      onClick={() => handleClick}
+      onClick={() => handleClick()}
     >
       <div className=" hover:scale-[102%] p-2 box-border hover:drop-shadow-xl group  duration-300">
         <div className="relative">
