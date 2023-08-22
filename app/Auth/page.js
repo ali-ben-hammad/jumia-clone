@@ -67,14 +67,14 @@ const Auth = () => {
       <div className="flex flex-col  h-screen w-[480px] max-w-full min-h-[500px] relative bg-white text-custom-gray my-0 mx-auto">
         <div className="p-2">
           {isMobile && (
-            <Link href="/" className="h-12 w-12 p-3 inline-block">
+            <Link href="/" className="inline-block w-12 h-12 p-3">
               <svg aria-label="" width="24" height="24">
                 <path d="m12 19.875-7.85-7.85L12 4.175l1.2 1.2L7.375 11.2H19.85v1.65H7.375l5.825 5.825Z"></path>
               </svg>
             </Link>
           )}
         </div>
-        <div className="mb-2 flex items-center justify-center h-16">
+        <div className="flex items-center justify-center h-16 mb-2">
           <Image src="/myjumia-top-logo.png" alt="" width="64" height="64" />
         </div>
         <div
@@ -84,13 +84,13 @@ const Auth = () => {
         >
           <div className={`${styles.tape}`}></div>
         </div>
-        <div className="py-2 px-6 flex flex-1">
+        <div className="flex flex-1 px-6 py-2">
           <form onSubmit={handleContinue} className="w-full">
-            <div className="text-center w-full">
-              <h2 className="font-bold text-black text-xl ">
+            <div className="w-full text-center">
+              <h2 className="text-xl font-bold text-black ">
                 Bienvenue chez Jumia
               </h2>
-              <p className="font-normal text-base mt-2 mb-4 text-custom-gray text-center">
+              <p className="mt-2 mb-4 text-base font-normal text-center text-custom-gray">
                 Saisissez votre address e-mail ou numéro de téléphone pour vous
                 connecter ou créer un compte Jumia .
               </p>
@@ -102,7 +102,7 @@ const Auth = () => {
                   type="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="w-full border border-gray-300 rounded px-3 py-2 outline-none peer focus:border-custom-orange focus:border-2 focus:ring-1 focus:ring-custom-orange focus:ring-opacity-50 transition-all duration-200 ease-in-out placeholder-transparent"
+                  className="w-full px-3 py-2 placeholder-transparent transition-all duration-200 ease-in-out border border-gray-300 rounded outline-none peer focus:border-custom-orange focus:border-2 focus:ring-1 focus:ring-custom-orange focus:ring-opacity-50"
                   placeholder="Adresse email ou numéro de téléphone"
                 />
                 <label
@@ -147,10 +147,10 @@ const Auth = () => {
             </div>
           </form>
         </div>
-        <div className=" text-sm  bottom-0 mt-auto">
+        <div className="bottom-0 mt-auto text-sm ">
           <div className="w-full px-6 text-center">
-            Si besoin d'aide, merci de vous référer au Centre d'Assistance ou de
-            contacter notre service client.
+            Si besoin d&apos;aide, merci de vous référer au Centre
+            d&apos;Assistance ou de contacter notre service client.
           </div>
           <div className="w-full py-8 text-center ">
             <svg

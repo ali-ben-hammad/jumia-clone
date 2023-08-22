@@ -84,7 +84,7 @@ const AddToCart = ({ productId, productPrice, stock }) => {
           >
             <path d="M11 9h2V6h3V4h-3V1h-2v3H8v2h3v3zm-4 9a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm10 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-9.8-3.3.9-1.7h7.5a2 2 0 0 0 1.7-1l3.9-7-1.8-1-1 2-2.8 5h-7l-.2-.3L6.2 6l-1-2-1-2H1v2h2l3.6 7.6L5.2 14A2 2 0 0 0 7 17h12v-2H7.4a.3.3 0 0 1-.2-.3z"></path>
           </svg>
-          <span className="mx-auto">J'Achète</span>
+          <span className="mx-auto">J&apos;Achète</span>
         </button>
       ) : (
         <div className="flex items-center justify-center w-full">

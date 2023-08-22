@@ -8,9 +8,8 @@ import Select from "@mui/material/Select";
 import FormControl from "@mui/material/FormControl";
 
 //applying custom styles to the select componentclassName="text-red-700 px-4 text-xs font-bold pt-1">
- 
 
-const Profile = ({onSubmit}) => {
+const Profile = ({ onSubmit }) => {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
@@ -18,7 +17,6 @@ const Profile = ({onSubmit}) => {
 
   const [prefixe, setPrefixe] = useState("+212");
   const [countries, setCountries] = useState([]);
-
 
   function isValidPhoneNumber(phoneNumber) {
     const phonePattern = /^\d{8,10}$/;
@@ -85,41 +83,46 @@ const Profile = ({onSubmit}) => {
     }
   };
   const renderValue = (selected) => {
-    const selectedCountry = countries.find((country) => country.dial_code === selected);
+    const selectedCountry = countries.find(
+      (country) => country.dial_code === selected
+    );
     return selectedCountry ? selectedCountry.dial_code : "";
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if(firstName.length >= 2 && lastName.length >= 2 &&  isPhoneValid && phoneNumber.length >= 8){
-      
-      console.log(firstName, lastName,  prefixe+phoneNumber);
-      onSubmit(firstName, lastName,  prefixe+phoneNumber);
-
+    if (
+      firstName.length >= 2 &&
+      lastName.length >= 2 &&
+      isPhoneValid &&
+      phoneNumber.length >= 8
+    ) {
+      console.log(firstName, lastName, prefixe + phoneNumber);
+      onSubmit(firstName, lastName, prefixe + phoneNumber);
     }
   };
   return (
-    <div className="bg-white overflow-y-auto h-screen ">
+    <div className="h-screen overflow-y-auto bg-white ">
       <div className="flex flex-col  h-screen w-[480px] max-w-full min-h-[500px] relative bg-white text-custom-gray my-0 mx-auto">
         <div className="p-2">
           {isMobile && (
-            <Link href="/" className="h-12 w-12 p-3 inline-block">
+            <Link href="/" className="inline-block w-12 h-12 p-3">
               <svg aria-label="" width="24" height="24">
                 <path d="m12 19.875-7.85-7.85L12 4.175l1.2 1.2L7.375 11.2H19.85v1.65H7.375l5.825 5.825Z"></path>
               </svg>
             </Link>
           )}
         </div>
-        <div className="mb-2 flex items-center justify-center h-16">
+        <div className="flex items-center justify-center h-16 mb-2">
           <Image src="/myjumia-top-logo.png" alt="" width="64" height="64" />
         </div>
-        <div className="py-2 px-6 flex flex-1">
+        <div className="flex flex-1 px-6 py-2">
           <form onSubmit={handleSubmit} action="" className="w-full">
-            <div className="text-center w-full">
-              <h2 className="font-bold text-black text-xl ">
+            <div className="w-full text-center">
+              <h2 className="text-xl font-bold text-black ">
                 Données personnelles
               </h2>
-              <p className="font-normal text-base mt-2 mb-4 text-custom-gray text-center">
+              <p className="mt-2 mb-4 text-base font-normal text-center text-custom-gray">
                 Il vous suffit de remplir les détails ci-dessous.
               </p>
             </div>
@@ -154,7 +157,7 @@ const Profile = ({onSubmit}) => {
                   Prénom*
                 </label>
               </div>
-              <div className="text-red-700 px-4 text-xs font-bold pt-1">
+              <div className="px-4 pt-1 text-xs font-bold text-red-700">
                 {firstName != "" && firstName.length < 2
                   ? "Le nom doit avoir un minimum de 2 caractères et un maximum de 60."
                   : ""}
@@ -189,12 +192,12 @@ const Profile = ({onSubmit}) => {
                   Nom de famille*
                 </label>
               </div>
-              <div className="text-red-700 px-4 text-xs font-bold pt-1">
+              <div className="px-4 pt-1 text-xs font-bold text-red-700">
                 {lastName != "" && lastName.length < 2
                   ? "Le nom doit avoir un minimum de 2 caractères et un maximum de 60."
                   : ""}
               </div>
-              <div className="flex  mt-4">
+              <div className="flex mt-4">
                 <FormControl>
                   <InputLabel id="demo-simple-select-label">Préfixe</InputLabel>
                   <Select
@@ -216,14 +219,13 @@ const Profile = ({onSubmit}) => {
                     }}
                   >
                     {countries.map((country) => (
-                      <MenuItem  key={country.code} value={country.dial_code}>
-                        {  country.name + " " + country.dial_code}
+                      <MenuItem key={country.code} value={country.dial_code}>
+                        {country.name + " " + country.dial_code}
                       </MenuItem>
                     ))}
-                
                   </Select>
                 </FormControl>
-                <div className="grow ml-2   flex-col">
+                <div className="flex-col ml-2 grow">
                   <div className="relative  flex group h-[56px]  text-custom-gray">
                     <input
                       id="phoneNumber"
@@ -252,7 +254,7 @@ const Profile = ({onSubmit}) => {
                       Numéro de téléphone*
                     </label>
                   </div>
-                  <div className="text-red-700 px-4 max-w-xs text-xs font-bold  pt-1">
+                  <div className="max-w-xs px-4 pt-1 text-xs font-bold text-red-700">
                     {!isPhoneValid
                       ? "Tapez un numéro de téléphone valide pour continuer"
                       : ""}
@@ -268,10 +270,10 @@ const Profile = ({onSubmit}) => {
             </div>
           </form>
         </div>
-        <div className=" text-sm  bottom-0">
+        <div className="bottom-0 text-sm ">
           <div className="w-full px-6 text-center">
-            Si besoin d'aide, merci de vous référer au Centre d'Assistance ou de
-            contacter notre service client.
+            Si besoin d&apos;aide, merci de vous référer au Centre
+            d&apos;Assistance ou de contacter notre service client.
           </div>
           <div className="w-full py-8 text-center ">
             <svg

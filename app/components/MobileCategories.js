@@ -14,6 +14,7 @@ export const MobileCategories = () => {
       </div>
       {categoriesData.map((category) => (
         <Link
+          key={category.name}
           href={"/" + decodeURIComponent(category.name)}
           className="py-3 px-4 min-h-[48px]  focus:bg-[#fcdbb9] flex items-center w-full"
         >

@@ -10,8 +10,8 @@ export const MenuItems = () => {
         </svg>
         Chat en direct
       </button>
-      <Link href="" className="py-2 px-4 flex items-center  justify-between">
-        <span className="font-bold text-xs text-custom-orange uppercase">
+      <Link href="" className="flex items-center justify-between px-4 py-2">
+        <span className="text-xs font-bold uppercase text-custom-orange">
           Votre Compte Jumia
         </span>
         <svg aria-label="Menu" className="" width="24" height="24">
@@ -44,7 +44,7 @@ export const MenuItems = () => {
           <svg aria-label="Menu" className="mr-2" width="24" height="24">
             <path d="M21 10.25c-.99 0-1.8.79-1.8 1.75s.81 1.75 1.8 1.75v3.5c0 .96-.81 1.75-1.8 1.75H4.8c-.99 0-1.8-.79-1.8-1.75v-3.5c1 0 1.8-.79 1.8-1.75S4 10.25 3 10.25v-3.5C3 5.79 3.82 5 4.8 5h14.4c.99 0 1.8.79 1.8 1.75v3.5zm-1.78-1.28V6.73H4.7l.01 2.24A3.57 3.57 0 0 1 6.6 12c0 1.29-.8 2.4-1.87 3v2.23h14.52V15a3.5 3.5 0 0 1-1.85-3c0-1.29.75-2.42 1.82-3.03zm-4.33 2.13c.22.04.29.29.16.45l-1.3 1.26c-.03.03-.03.09-.03.14l.3 1.76a.25.25 0 0 1-.35.27l-1.62-.86a.2.2 0 0 0-.14 0l-1.58.84c-.18.09-.4-.07-.36-.27l.3-1.8a.14.14 0 0 0-.03-.13L8.96 11.5c-.15-.14-.06-.39.14-.43l1.8-.26c.03-.02.08-.04.1-.1l.78-1.6c.1-.17.36-.17.45 0l.8 1.64c.01.06.05.1.1.1l1.76.24z"></path>{" "}
           </svg>
-          Bon d'achat
+          Bon d&apos;achat
         </Link>
         <Link
           href=""
@@ -53,7 +53,7 @@ export const MenuItems = () => {
           <svg aria-label="Menu" className="mr-2" width="24" height="24">
             <path d="M16.5 3c-1.74 0-3.41.8-4.5 2.05A6.04 6.04 0 0 0 7.5 3 5.4 5.4 0 0 0 2 8.4c0 3.7 3.4 6.72 8.55 11.31L12 21l1.45-1.3C18.6 15.13 22 12.1 22 8.4A5.4 5.4 0 0 0 16.5 3zm-4.4 15.25l-.1.1-.1-.1C7.14 14.03 4 11.23 4 8.4c0-1.97 1.5-3.44 3.5-3.44a3.9 3.9 0 0 1 3.57 2.32h1.87a3.89 3.89 0 0 1 3.56-2.32c2 0 3.5 1.47 3.5 3.44 0 2.83-3.14 5.63-7.9 9.85z"></path>{" "}
           </svg>
-          Vos listes d'envies
+          Vos listes d&apos;envies
         </Link>
       </>
     </div>

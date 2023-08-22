@@ -61,7 +61,7 @@ export const Dropdown2 = () => {
       {isDropdownOpen && (
         <div className="absolute rounded shadow-[0_0_10px_0_rgba(0,0,0,0.15)] z-99 top-full bg-white font-normal text-sm w-full min-w-[206px]">
           <a className="flex items-center px-4 hover:bg-[#f1f1f2] py-3">
-            Centre d'assistance
+            Centre d&apos;assistance
           </a>
           <a className="flex items-center px-4 hover:bg-[#f1f1f2]  py-3">
             Passer et suivre ma commande

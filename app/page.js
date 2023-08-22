@@ -86,10 +86,12 @@ export default function Home() {
     <div className="">
       <HeroSection />
       <TopDeals />
-      <button onClick={() => updateProducts()}>yoo</button>;
     </div>
   );
 }
+/*
+
+ <button onClick={() => updateProducts()}>yoo</button>;
 
 const knownBrands = [
   "Baoda",
@@ -142,3 +144,4 @@ const updateProducts = async () => {
     console.error("Error updating products:", error);
   }
 };
+*/

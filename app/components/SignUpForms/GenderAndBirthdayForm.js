@@ -12,7 +12,6 @@ import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { useState } from "react";
 import dayjs from "dayjs";
 
-
 export const GenderAndBirthdayForm = ({ onSubmit }) => {
   const [gender, setGender] = useState("");
   const [birthday, setBirthday] = useState(null);
@@ -55,18 +54,18 @@ export const GenderAndBirthdayForm = ({ onSubmit }) => {
       >
         <div className="tape"></div>
       </div>
-      <div className="py-2 px-6 flex flex-1">
+      <div className="flex flex-1 px-6 py-2">
         <form onSubmit={handleSubmit} action="" className="w-full">
-          <div className="text-center w-full">
-            <h2 className="font-bold text-black text-xl ">
+          <div className="w-full text-center">
+            <h2 className="text-xl font-bold text-black ">
               Données personnelles
             </h2>
-            <p className="font-normal text-base mt-2 mb-4 text-custom-gray text-center">
+            <p className="mt-2 mb-4 text-base font-normal text-center text-custom-gray">
               Il vous suffit de remplir les détails ci-dessous.
             </p>
           </div>
           <div className="pt-4">
-            <div className="flex  mt-4">
+            <div className="flex mt-4">
               <FormControl className="w-full">
                 <InputLabel id="demo-simple-select-label">Genre</InputLabel>
                 <Select
@@ -125,7 +124,7 @@ export const GenderAndBirthdayForm = ({ onSubmit }) => {
             >
               Continuer
             </button>
-            <div className="text-sm flex w-full mt-2 px-8">
+            <div className="flex w-full px-8 mt-2 text-sm">
               <input
                 id="terms"
                 type="checkbox"
@@ -135,7 +134,7 @@ export const GenderAndBirthdayForm = ({ onSubmit }) => {
               <label htmlFor="terms">
                 {" "}
                 <span className="text-custom-gray">
-                  J'ai lu et accepté les{" "}
+                  J&apos;ai lu et accepté les{" "}
                   <a href="#" className="text-custom-orange">
                     Termes et conditions
                   </a>
