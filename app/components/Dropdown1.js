@@ -9,6 +9,7 @@ export const Dropdown1 = () => {
   const dropdownRef = useRef(null);
   const { user, logout } = useAuth();
   const [loggedIn, setLoggedIn] = useState(false);
+  const router = useRouter();
   useEffect(() => {
     // console.log("user", user);
     if (user) {
@@ -24,6 +25,7 @@ export const Dropdown1 = () => {
   const handleLogout = () => {
     setLoggedIn(false);
     logout();
+    router.push('/')
   };
 
   useEffect(() => {

@@ -12,6 +12,10 @@ const AddToCart = ({ productId, productPrice, stock }) => {
   var cartRef = 0;
 
   const handleAddToCart = async () => {
+    if (!user) {
+      router.push("/Auth");
+      return;
+    }
     if (user) {
       if (count >= stock) {
         alert("Stock insuffisant");
@@ -43,7 +47,7 @@ const AddToCart = ({ productId, productPrice, stock }) => {
     const fetchCart = async () => {
       if (!user) {
         // back to login
-        router.push("/login");
+        return;
       }
       cartRef = doc(db, "carts", user.uid || "");
       const cartDoc = await getDoc(cartRef);

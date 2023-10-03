@@ -13,12 +13,19 @@ export const Cart = () => {
 
   const [count, setCount] = useState(0);
   useEffect(() => {
+    console.log("user", user);
+    if (!user) {
+      // back to login
+      
+    
+      setCount(0);
+      return;
+      
+    }
     const fetchCart = async () => {
-      if (!user) {
-        // back to login
-        setCount(0);
-      }
+    
       cartRef = doc(db, "carts", user.uid || "");
+   //   console.log(cartRef);
 
       const cartDoc = await getDoc(cartRef);
       if (cartDoc.exists()) {
@@ -30,7 +37,10 @@ export const Cart = () => {
     // call the function each time the cart changes
     const unsubscribe = onSnapshot(cartRef, (doc) => {
       const cartData = doc.data();
+      if(cartData)
       setCount(cartData.totalProductsCount);
+      else
+      setCount(0)
     });
     return () => {
       unsubscribe();
@@ -39,7 +49,7 @@ export const Cart = () => {
 
   const handleCartClick = () => {
     if (!user) {
-      router.push("/login");
+      router.push("/Auth");
 
       return;
     }

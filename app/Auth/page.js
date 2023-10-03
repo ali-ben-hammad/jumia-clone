@@ -129,6 +129,8 @@ const Auth = () => {
                 Continuer
               </button>
 
+             {
+             /*
               <button className="mt-16  p-4 rounded font-bold text-white bg-[#1877f2] h-12 w-full flex items-center round ">
                 <svg
                   width="21"
@@ -144,6 +146,8 @@ const Auth = () => {
                 </svg>
                 <span className="mx-auto">Connectez-vous avec Facebook</span>
               </button>
+              */
+              }
             </div>
           </form>
         </div>

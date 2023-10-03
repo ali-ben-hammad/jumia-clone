@@ -66,7 +66,7 @@ export const Card2 = ({ product }) => {
           }
         >
           <div className="hidden group-hover:flex">
-            <AddToCart productId={id} productPrice={price} stock={stock} />
+            <AddToCart productId={id} productPrice={discountPrice} stock={stock} />
           </div>
         </div>
       </div>
