@@ -19,7 +19,7 @@ const CartPage = () => {
   const router = useRouter();
 
   const [count, setCount] = useState(0);
-  const [total, setTotal] = useState(0);
+  const [total, setTotal] = useState(0.0);
   const [cartProducts, setCartProducts] = useState([]);
   var cartRef = 0;
 
@@ -33,6 +33,7 @@ const CartPage = () => {
       const cartDoc = await getDoc(cartRef);
       if (cartDoc.exists()) {
         const cartData = cartDoc.data();
+        setTotal(parseFloat( cartData.totalPrice))  ;
         setCount(cartData.totalProductsCount);
         setCartProducts(cartData.products);
       }
@@ -42,7 +43,7 @@ const CartPage = () => {
     const unsubscribe = onSnapshot(cartRef, (doc) => {
       if (doc.exists()) {
         const cartData = doc.data();
-        setTotal(cartData.totalPrice);
+        setTotal(parseFloat( cartData.totalPrice))  ;
         setCount(cartData.totalProductsCount);
         setCartProducts(cartData.products);
       }

@@ -62,7 +62,8 @@ export const AuthContextProvider = ({ children }) => {
       const cartRef = doc(db, "carts", uid);
       const initialCartData = {
         products: [],
-        count: 0,
+        totalPrice: 0,
+        totalProductsCount : 0
       };
       await setDoc(cartRef, initialCartData);
 

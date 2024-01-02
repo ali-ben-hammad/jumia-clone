@@ -37,7 +37,7 @@ export const addToCart = async (userUid, productId, productPrice) => {
     const updatedTotalPrice = numericTotalPrice + numericProductPrice;
 
     // Update the total price with formatted 2 decimal places
-    cartData.totalPrice = updatedTotalPrice.toFixed(2);
+    cartData.totalPrice = parseFloat(updatedTotalPrice.toFixed(2));
     console.log("total  : : " + cartData.totalPrice);
     cartData.totalProductsCount += 1;
 
@@ -52,8 +52,9 @@ export const addToCart = async (userUid, productId, productPrice) => {
           quantity: 1,
         },
       ],
-      totalPrice: productPrice,
-      totalProductsCount: 1,
+      totalPrice: productPrice.toFixed(2),
+      // add totalProductsCount
+        totalProductsCount: productPrice,
     };
     await setDoc(cartRef, newCart);
   }

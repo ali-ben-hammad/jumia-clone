@@ -20,19 +20,27 @@ export const GenderAndBirthdayForm = ({ onSubmit }) => {
   const [acceptedTerms, setAcceptedTerms] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   //log the birthday date not the birthday object
+
+
   const handleSubmit = (event) => {
-    event.preventDefault();
-    setGenderError(!gender);
-    setBirthdayError(!birthday);
+    try {
 
-    if (birthday && gender) {
-      setIsLoading(true);
-      const formattedBirthday = dayjs(birthday).format("YYYY-MM-DD");
 
-      onSubmit({
-        gender,
-        birthday: formattedBirthday,
-      });
+      event.preventDefault();
+      setGenderError(!gender);
+      setBirthdayError(!birthday);
+
+      if (birthday && gender) {
+        setIsLoading(true);
+        const formattedBirthday = dayjs(birthday).format("YYYY-MM-DD");
+
+        onSubmit({
+          gender,
+          birthday: formattedBirthday,
+        });
+      }
+    } catch (error) {
+        console.log(error + " 222");
     }
   };
 

@@ -3,7 +3,7 @@ import React from "react";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 
-export const SignUpComplete = (name) => {
+    export const SignUpComplete = ({name}) => {
   const [countdown, setCountdown] = useState(5); // Initial countdown value
   const router = useRouter();
 
@@ -21,7 +21,7 @@ export const SignUpComplete = (name) => {
   useEffect(() => {
     // Redirect to the home page when the countdown reaches 0
     if (countdown === 0) {
-      //   router.push('/'); // Replace '/' with the path to your home page
+         router.push('/'); // Replace '/' with the path to your home page
     }
   }, [countdown]);
   return (

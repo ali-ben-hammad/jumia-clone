@@ -61,6 +61,8 @@ const SignUp = () => {
         console.log(res);
 
         setStep(4);
+        console.log("moving to step 4");
+        console.log(userData.lastName + " lastname ");
       })
       .catch((err) => {
         console.log(err);
